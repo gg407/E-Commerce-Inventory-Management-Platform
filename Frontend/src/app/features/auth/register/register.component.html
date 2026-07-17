@@ -1,0 +1,28 @@
+<div class="auth-wrap">
+  <div class="auth-orb orb-1"></div>
+  <div class="auth-orb orb-2"></div>
+
+  <div class="card auth-card animate-pop">
+    <h2 class="auth-title">Create <span class="grad-text">account</span></h2>
+    <p class="auth-subtitle">Join and start shopping in seconds</p>
+
+    <div class="alert alert-error" *ngIf="error">{{ error }}</div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" formControlName="email" />
+      </div>
+      <div class="form-field">
+        <label>Password (min 8 characters)</label>
+        <input type="password" formControlName="password" />
+      </div>
+      <button type="submit" class="btn-primary auth-submit" [disabled]="form.invalid || loading">
+        <span *ngIf="!loading">Sign up</span>
+        <span class="spinner" *ngIf="loading"></span>
+      </button>
+    </form>
+
+    <p class="auth-switch">Already have an account? <a routerLink="/login">Log in</a></p>
+  </div>
+</div>

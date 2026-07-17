@@ -1,0 +1,29 @@
+<nav class="navbar">
+  <a routerLink="/products" class="brand">
+    <span class="brand-icon">◆</span>
+    <span class="grad-text">Nova<span class="brand-thin">Shop</span></span>
+  </a>
+
+  <div class="nav-links">
+    <a routerLink="/products" routerLinkActive="active" class="nav-link">Products</a>
+    <a routerLink="/cart" routerLinkActive="active" class="nav-link" *ngIf="authService.isLoggedIn">
+      Cart
+      <span class="badge" *ngIf="cartService.itemCount > 0" [class.bump]="bump">{{ cartService.itemCount }}</span>
+    </a>
+    <a routerLink="/orders" routerLinkActive="active" class="nav-link" *ngIf="authService.isLoggedIn">Orders</a>
+
+    <div class="divider" *ngIf="authService.isLoggedIn"></div>
+
+    <ng-container *ngIf="authService.isLoggedIn; else loggedOut">
+      <span class="user-chip">
+        <span class="user-dot"></span>
+        {{ authService.currentEmail }}
+      </span>
+      <button class="btn-secondary" (click)="logout()">Logout</button>
+    </ng-container>
+    <ng-template #loggedOut>
+      <a routerLink="/login" class="btn-secondary">Login</a>
+      <a routerLink="/register" class="btn-primary">Sign up</a>
+    </ng-template>
+  </div>
+</nav>

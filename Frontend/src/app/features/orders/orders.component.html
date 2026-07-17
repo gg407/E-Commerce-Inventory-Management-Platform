@@ -1,0 +1,39 @@
+<div class="container orders-container">
+  <h1 class="page-title">Order <span class="grad-text">History</span></h1>
+
+  <div *ngIf="loading" class="loading-row">
+    <span class="spinner"></span> Loading your orders...
+  </div>
+
+  <div *ngIf="!loading && orders.length === 0" class="card empty-state animate-pop">
+    <div class="empty-icon">📦</div>
+    <h3>No orders yet</h3>
+    <p>Your placed orders will show up here.</p>
+    <a routerLink="/products" class="btn-primary">Start shopping</a>
+  </div>
+
+  <div class="orders-list">
+    <div class="card order-card stagger" *ngFor="let order of orders; let i = index" [style.--d]="(i * 70) + 'ms'">
+      <div class="order-header">
+        <div>
+          <strong>Order #{{ order.id }}</strong>
+          <span class="order-date">{{ order.createdAt | date:'MMM d, y · h:mm a' }}</span>
+        </div>
+        <span class="status-badge" [class]="statusClass(order.status)">{{ order.status }}</span>
+      </div>
+
+      <div class="order-items">
+        <div class="order-item" *ngFor="let item of order.items">
+          <span class="oi-name">{{ item.productName }}</span>
+          <span class="oi-qty">× {{ item.quantity }}</span>
+          <span class="oi-price">{{ item.unitPrice | currency:'USD' }}</span>
+        </div>
+      </div>
+
+      <div class="order-total">
+        <span>Total</span>
+        <strong class="grad-text">{{ order.totalAmount | currency:'USD' }}</strong>
+      </div>
+    </div>
+  </div>
+</div>

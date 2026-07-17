@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Discover <span class="grad-text">Products</span></h1>
+      <p class="page-subtitle">Curated picks, refreshed daily.</p>
+    </div>
+  </div>
+
+  <div class="alert alert-error" *ngIf="error">{{ error }}</div>
+
+  <!-- Skeleton loading state -->
+  <div *ngIf="loading" class="grid">
+    <div class="card skel-card" *ngFor="let s of skeletons">
+      <div class="skeleton" style="height:140px; margin-bottom:1rem;"></div>
+      <div class="skeleton" style="height:12px; width:40%; margin-bottom:0.6rem;"></div>
+      <div class="skeleton" style="height:18px; width:80%; margin-bottom:0.6rem;"></div>
+      <div class="skeleton" style="height:12px; width:100%; margin-bottom:0.4rem;"></div>
+      <div class="skeleton" style="height:12px; width:60%;"></div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading" class="grid">
+    <div class="card product-card stagger"
+         *ngFor="let product of products; let i = index; trackBy: trackById"
+         [style.--d]="(i * 60) + 'ms'">
+      <div class="product-image">
+        <div class="image-shine"></div>
+        <span class="product-emoji">🛍️</span>
+        <span class="badge-stock" *ngIf="product.stockQuantity === 0">Out of stock</span>
+        <span class="badge-cat">{{ product.categoryName }}</span>
+      </div>
+
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+        <p class="description">{{ product.description }}</p>
+
+        <div class="product-footer">
+          <span class="price grad-text">{{ product.price | currency:'USD' }}</span>
+          <button class="btn-primary add-btn"
+                  [disabled]="product.stockQuantity === 0 || addingId === product.id"
+                  (click)="addToCart(product)">
+            <span *ngIf="addingId !== product.id">Add to cart</span>
+            <span class="spinner" *ngIf="addingId === product.id"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && totalPages > 1" class="pagination">
+    <button class="btn-icon" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">←</button>
+    <span class="page-indicator">{{ currentPage + 1 }} <span class="text-muted">/ {{ totalPages }}</span></span>
+    <button class="btn-icon" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages - 1">→</button>
+  </div>
+</div>
