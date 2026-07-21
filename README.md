@@ -1,8 +1,8 @@
 # E-Commerce Platform
 
-A full-stack e-commerce platform built with **Spring Boot 3 / Java 17** (backend) and
+A full-stack e-commerce platform built with **Spring Boot 3 / Java 22** (backend) and
 **Angular 17 (standalone components)** (frontend), using **JWT** authentication and
-**PostgreSQL** (or in-memory **H2** for zero-setup local runs).
+**MySQL** (or in-memory **H2** for zero-setup local runs).
 
 This project is based on the architecture described in the accompanying
 *Comprehensive Technical Development Guide* (layered architecture, JWT auth,
