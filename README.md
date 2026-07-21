@@ -13,7 +13,7 @@ catalog, cart, checkout, order history).
 
 ```
 ecommerce-platform/
-├── backend/     Spring Boot REST API (Java 17, Maven)
+├── backend/     Spring Boot REST API (Java 22, Maven)
 ├── frontend/    Angular 17 SPA (standalone components)
 └── docker-compose.yml
 ```
